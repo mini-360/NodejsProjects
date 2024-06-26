@@ -1,10 +1,9 @@
 import express from "express";
-
+import {handleGetAllUsers} from "../controllers/user.controller.js"
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const allDbUsers = await User.find({});
-  return res.json(allDbUsers);
+ 
 });
 router
   .route("/:id")
