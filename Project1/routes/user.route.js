@@ -1,11 +1,14 @@
 import express from "express";
-
+import {
+  handleGetAllUsers,
+  handleGetUserById,
+  handleUpdateUserById,
+  handleDeleteUserById,
+  handleCreateNewUser,
+} from "../controllers/user.controller.js";
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const allDbUsers = await User.find({});
-  return res.json(allDbUsers);
-});
+router.route("/").get(handleGetAllUsers).post(handleCreateNewUser);
 router
   .route("/:id")
   .get(handleGetUserById)
