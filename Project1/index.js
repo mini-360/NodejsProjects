@@ -1,5 +1,4 @@
 import express from "express";
-import fs from "fs";
 import { connectMongoDB } from "./connection.js";
 import { logReqRes } from "./middlewares/index.js";
 
@@ -9,7 +8,7 @@ const app = express();
 const port = 8000;
 
 //Connection
-connectMongoDB("mongodb://127.0.0.1:27017/project1");
+connectMongoDB("mongodb://127.0.0.1:27017/project1").then(()=>console.log("MongoDB connected"));
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
@@ -18,5 +17,5 @@ app.use((req, res, next) => {
 });
 
 app.use(logReqRes("log.txt"))
-app.use("/user", userRouter);
+app.use("/api/users", userRouter);
 app.listen(port, () => console.log("Server started"));
